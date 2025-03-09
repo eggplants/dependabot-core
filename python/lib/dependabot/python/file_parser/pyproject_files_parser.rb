@@ -42,6 +42,8 @@ module Dependabot
 
         sig { returns(Dependabot::FileParsers::Base::DependencySet) }
         def pyproject_dependencies
+          return pep621_dependencies if using_pep621?
+
           if using_poetry?
             missing_keys = missing_poetry_keys
 
